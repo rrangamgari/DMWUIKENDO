@@ -1,0 +1,30 @@
+<header>
+  <mat-toolbar color="primary">My Dmw Applications</mat-toolbar>
+</header>
+
+
+  <div class="row">
+    <div class="full-height col-md-3 ">
+      <kendo-treeview
+        [nodes]="data"
+        textField="text"
+        kendoTreeViewExpandable
+        kendoTreeViewSelectable
+        kendoTreeViewHierarchyBinding
+        childrenField="items"
+        kendoTreeViewItem
+        [(selectedKeys)]="selectedKeys"
+        [isSelected]="isItemSelected"
+        (selectionChange)="handleSelection($event)"
+      >
+      </kendo-treeview>
+    </div> <!-- we use mat-card instead of div -->
+    <div class="col-md-9 full-height">Loading Grid...</div>
+
+  </div>
+
+
+
+<footer class="fixed-bottom">
+  <mat-toolbar color="baccent">My Footer</mat-toolbar>
+</footer>
