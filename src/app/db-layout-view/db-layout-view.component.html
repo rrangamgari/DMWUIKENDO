@@ -3,28 +3,66 @@
 </header>
 
 
-  <div class="row">
-    <div class="full-height col-md-3 ">
-      <kendo-treeview
-        [nodes]="data"
-        textField="text"
-        kendoTreeViewExpandable
-        kendoTreeViewSelectable
-        kendoTreeViewHierarchyBinding
-        childrenField="items"
-        kendoTreeViewItem
-        [(selectedKeys)]="selectedKeys"
-        [isSelected]="isItemSelected"
-        (selectionChange)="handleSelection($event)"
-      >
-      </kendo-treeview>
-    </div> <!-- we use mat-card instead of div -->
-    <div class="col-md-9 full-height">Loading Grid...</div>
+<div class="row">
+  <div class="full-height col-md-2 ">
+    <kendo-treeview
+      [nodes]="data"
+      textField="text"
+      kendoTreeViewExpandable
+      kendoTreeViewSelectable
+      kendoTreeViewHierarchyBinding
+      childrenField="items"
+      kendoTreeViewItem
+      [(selectedKeys)]="selectedKeys"
+      [isSelected]="isItemSelected"
+      (selectionChange)="handleSelection($event)"
+    >
+    </kendo-treeview>
+  </div> <!-- we use mat-card instead of div -->
+  <div class="col-md-10 full-height">
+    <kendo-grid
+      [kendoGridBinding]="gridView"
+      kendoGridSelectBy="id"
+      [selectedKeys]="mySelection"
+      [pageSize]="20"
+      [pageable]="true"
+      [sortable]="true"
+      [groupable]="true"
+      [reorderable]="true"
+      [resizable]="true"
+      [height]="430"
+      [columnMenu]="{ filter: true }"
+    >
+      <!-- <ng-template kendoGridToolbarTemplate>
+         <input placeholder="Search in all columns..." kendoTextBox (input)="onFilter($event.target.value)"/>
+         <button kendoGridExcelCommand type="button" icon="file-excel" style="float:right;">Export to Excel</button>
+         <button kendoGridPDFCommand icon="file-pdf" style="float:right;">Export to PDF</button>
+       </ng-template>-->
+      <kendo-grid-checkbox-column
+        [width]="45"
+        [headerClass]="{'text-center': true}"
+        [class]="{'text-center': true}"
+        [resizable]="false"
+        [columnMenu]="false"
+        showSelectAll="true"
+      ></kendo-grid-checkbox-column>
+      <kendo-grid-column-group title="Employee" [columnMenu]="false" *ngFor="let dataColumn of gridData| keyvalue">
+        <kendo-grid-column field="{{dataColumn.key}}" title="{{dataColumn.key}}" [width]="220">
 
+            <!--<div class="customer-photo" [ngStyle]="{'background-image' : photoURL(dataItem)}"></div>-->
+            <div class="customer-name">{{ dataColumn.value.id }}</div>
+        </kendo-grid-column>
+      </kendo-grid-column-group>
+
+
+    </kendo-grid>
   </div>
 
+</div>
 
-
+<div *ngFor="let item of gridData | keyvalue">
+  Key: <b>{{item.key}}</b> and Value: <b>{{item.value.id}}</b>
+</div>
 <footer class="fixed-bottom">
   <mat-toolbar color="baccent">My Footer</mat-toolbar>
 </footer>

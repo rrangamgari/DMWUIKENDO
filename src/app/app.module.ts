@@ -8,6 +8,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatCardModule, MatIconModule, MatProgressBarModule, MatSliderModule, MatToolbarModule, MatTreeModule} from '@angular/material';
 import {SharedModule, TreeViewModule} from '@progress/kendo-angular-treeview';
 import {HttpClientModule} from '@angular/common/http';
+import { GridModule } from '@progress/kendo-angular-grid';
+
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import {HttpClientModule} from '@angular/common/http';
     MatProgressBarModule,
     HttpClientModule,
     TreeViewModule,
-    SharedModule
+    SharedModule,
+    GridModule
   ],
   providers: [],
   bootstrap: [AppComponent]
